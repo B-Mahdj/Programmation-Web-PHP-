@@ -1,0 +1,30 @@
+#header{
+	background-color: blue;
+	padding-bottom : 5%;
+	/*Fixer le problème des espaces blancs sur les cotés*/
+}
+
+.bouton{
+	border: 0;
+    line-height: 2.5;
+    padding: 0 4%;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+	float : right;
+	margin-right : 1%;
+}
+
+.bouton:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+.titre_site {
+	text-align:center;
+	font-size : 20px;
+	font-family : "Comic Sans MS", cursive, sans-serif;
+}
+
+a{color : inherit;}
