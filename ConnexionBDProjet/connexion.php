@@ -1,6 +1,6 @@
     <?php 
 
-    require("inscription.tpl");
+    require("connexion.tpl");
         //Formulaire Inscription
     
         if((sizeof($_POST)) > 0){
@@ -9,7 +9,6 @@
 
         $nom = $_POST['nom'];
         $mdp = $_POST['mdp'];
-        $email = $_POST['email'];
 
 
     //Vérifier que les données rentrées sont valides et initialisées
@@ -22,10 +21,7 @@
         if(!isset($mdp) || !is_null($mdp)){
             echo 'Veuillez rentrer un mot de passe'; $validite = FALSE;
         }    
-        if(!isset($email) || !is_null($email)){
-            echo 'Veuillez rentrer un email'; $validite = FALSE;
-        }
-
+            
         //Données valides
 
         if (!is_string($nom)){
@@ -34,33 +30,31 @@
         if (!is_string($mdp)){
             echo 'Veuillez rentrer un mot de passe valide'; $validite = FALSE;
         }
-        if (!is_string($email)){
-            echo 'Veuillez rentrer un email valide'; $validite = FALSE;
-        }
             
-        //Cryptage mdp via fonction sha1()
-        $mdp = sha1($mdp);
-
-
-    //Vérifier que Utilisateur n'est pas déjà inscrit 
+        //Vérifier que l'utilisateur existe bien
         require("connectSQL.php");
-        if(verif_ident($nom, $pdo)){
-            echo "L'utilisateur rentré existe déjà"; $validite = FALSE;
+        if (!verif_ident($nom, $pdo)){
+            echo "Votre nom d'utilisateur n'existe pas dans la base de données"; $validite = FALSE;
         }
 
-
-    //INSERTION des Données
+    //Verification des Données
 
         if ($validite == True){
-
-            $req = $pdo->prepare('INSERT INTO entreprise (nom, mdp, email) VALUES(:nom, :mdp, :email)');
-            $req->execute(array(
-                'nom' => $nom,
-                'mdp' => $mdp,
-                'email' => $email
-            ));
-
-            echo 'Vous avez bien été inscris';
+            $mdp_sha1 = sha1($mdp);
+            
+            $sql = "SELECT mdp FROM entreprise WHERE nom=:nom";
+            $stm = $pdo->prepare($sql);
+            $stm ->bindParam(':nom', $nom, PDO::PARAM_STR);
+            $stm->execute();
+            $mdp_bd = $stm->fetch();
+            
+            if($mdp_sha1==$mdp_bd["mdp"]){
+                echo 'Connexion réussie';
+                //Se connecter sur le site en tant qu'inscrit
+            }
+            else{
+                echo "Mauvais mot de passe";
+            }
         }
  }
 
