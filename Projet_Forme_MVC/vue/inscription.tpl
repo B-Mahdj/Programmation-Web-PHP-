@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>identification</title>
-  <link rel="stylesheet" href="./styleCSS/style_inscription.css">
+  <link rel="stylesheet" href="./vue/styleCSS/style_inscription.css">
 </head>
 
 <body>
@@ -21,7 +21,8 @@
 </form>
 
 <div class = "lien">
-<a href = "">Retour au site</a>
+<a href = "index.php">Retour au site</a>
+<a href = "index.php?controle=entreprise&action=connexion">Se connecter</a>
 </div>
     
 </div>

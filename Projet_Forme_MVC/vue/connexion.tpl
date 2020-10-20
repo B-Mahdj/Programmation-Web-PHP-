@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html>
 
 <head>
   <meta charset="utf-8">
   <title>Connexion</title>
-  <link rel="stylesheet" href="./styleCSS/style_connexion.css">
+  <link rel="stylesheet" href="./vue/styleCSS/style_connexion.css">
 </head>
 
 <body>
@@ -17,7 +17,8 @@
 </form>
 
 <div class = "lien">
-<a href = "">Retour au site</a>
+<a href = "index.php">Retour au site</a>
+<a href = "index.php?controle=entreprise&action=inscription">S'inscrire</a>
 </div>
 
 </div>
