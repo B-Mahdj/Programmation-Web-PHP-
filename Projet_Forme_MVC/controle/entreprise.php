@@ -49,7 +49,8 @@ function inscription(){
             $profil = null;
             inscriptionBD($nom, $mdp, $email, $profil);
             $_SESSION['profil'] = $profil;
-            require("./vue/accueil_connecte.tpl");//charge page pour personne connectee 
+            $nexturl = "index.php?controle=entreprise&action=accueil_connecte";
+            header("Location:" . $nexturl);//charge page pour personne connectee 
         }
      }
 }
@@ -88,14 +89,27 @@ function connexion(){
     
         if($validite == true){
             $profil = null;
-            $co = connexionBD($nom, $mdp, $profil);
-            $_SESSION['profil'] = $profil;
-            if($co == true){
-                $nexturl = "index.php?controle=entreprise&action=accueil_connecte";
-				header("Location:" . $nexturl);
+            if($nom = "root"){ /*Cas unique de tentative en tant que loueur*/
+                $co = connexionBDLoueur($nom, $mdp, $profil);
+                $_SESSION['profil'] = $profil;
+                if($co == true){
+                    $nexturl = "index.php?  controle=entreprise&action=accueil_loueur";
+				    header("Location:" . $nexturl);
+                }
+                else{
+                    echo "Mauvais mot de passe";
+                }
             }
-            else{
-                echo "Mauvais mot de passe";
+            else {
+                $co = connexionBD($nom, $mdp, $profil); 
+                $_SESSION['profil'] = $profil;
+                if($co == true){
+                    $nexturl = "index.php?  controle=entreprise&action=accueil_connecte";
+				    header("Location:" . $nexturl);
+                }
+                else{
+                    echo "Mauvais mot de passe";
+                }
             }
         }
     }
@@ -113,6 +127,11 @@ function deconnexion(){
     unset($_SESSION['profil']);
     $nexturl = "index.php?controle=entreprise&action=accueil";
     header("Location:" . $nexturl);
+}
+
+function accueil_loueur(){
+    require("vue/accueil.tpl"); /*Accueil du loueur ou il pourra 
+    réaliser ses propres services*/
 }
 
 

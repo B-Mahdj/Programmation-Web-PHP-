@@ -58,4 +58,24 @@ function verif_ident($nom, $pdo){
     }
 }
 
+function connexionBDLoueur($nom, $mdp, $profil){
+    require("modele/connectSQL.php");
+    
+    $mdp_sha1 = sha1($mdp);
+            
+    $sql = "SELECT mdp FROM entreprise WHERE nom=:nom";
+    $stm = $pdo->prepare($sql);
+    $stm ->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $stm->execute();
+    $mdp_bd = $stm->fetch();
+            
+    if($mdp_sha1==$mdp_bd["mdp"]){
+        $profil = $nom;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 ?>
