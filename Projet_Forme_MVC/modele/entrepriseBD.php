@@ -1,24 +1,28 @@
 <?php 
 	/* Fonctions-modèle réalisant les requetes de gestion des entreprises en base de données */
 
-function inscriptionBD($nom, $mdp, $email){
+function inscriptionBD($nom, $mdp, $email, $profil){
     
-    if(verif_ident($nom,$pdo)){
     require("modele/connectSQL.php");
+    
+    if(!verif_ident($nom,$pdo)){
     $req = $pdo->prepare('INSERT INTO entreprise (nom, mdp, email) VALUES(:nom, :mdp, :email)');
     $req->execute(array(
         'nom' => $nom,
         'mdp' => $mdp,
         'email' => $email
     ));
-
-    echo 'Vous avez bien été inscris';
-    }
     
-    echo 'Cet utilisateur existe deja';
+    $profil = $nom;
+    }
+    else{
+        echo 'Cet utilisateur existe deja'; 
+    }
 }
 
-function connexionBD($nom, $mdp){
+function connexionBD($nom, $mdp, $profil){
+    
+    require("modele/connectSQL.php");
     
     if(!verif_ident($nom,$pdo)){
         return false;
@@ -32,6 +36,7 @@ function connexionBD($nom, $mdp){
     $mdp_bd = $stm->fetch();
             
     if($mdp_sha1==$mdp_bd["mdp"]){
+        $profil = $nom;
         return true;
     }
     else{
@@ -41,6 +46,7 @@ function connexionBD($nom, $mdp){
 
 
 function verif_ident($nom, $pdo){
+    
     $stm = $pdo->prepare("SELECT * FROM entreprise WHERE nom=?");
     $stm->execute([$nom]);
     $b = $stm->fetch();

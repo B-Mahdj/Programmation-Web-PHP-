@@ -20,13 +20,13 @@ function inscription(){
 
         //Données initialisées
 
-        if(!isset($nom) || !is_null($nom)){
+        if(!isset($nom) || is_null($nom)){
             echo 'Veuillez rentrer un nom'; $validite = FALSE;
         }  
-        if(!isset($mdp) || !is_null($mdp)){
+        if(!isset($mdp) || is_null($mdp)){
             echo 'Veuillez rentrer un mot de passe'; $validite = FALSE;
         }    
-        if(!isset($email) || !is_null($email)){
+        if(!isset($email) || is_null($email)){
             echo 'Veuillez rentrer un email'; $validite = FALSE;
         }
 
@@ -46,7 +46,10 @@ function inscription(){
         $mdp = sha1($mdp);
     
         if($validite == true){
-            inscriptionBD($nom, $mdp, $email);
+            $profil = null;
+            inscriptionBD($nom, $mdp, $email, $profil);
+            $_SESSION['profil'] = $profil;
+            require("./vue/accueil_connecte.tpl");//charge page pour personne connectee 
         }
      }
 }
@@ -67,10 +70,10 @@ function connexion(){
 
         //Données initialisées
 
-        if(!isset($nom) || !is_null($nom)){
+        if(!isset($nom) || is_null($nom)){
             echo 'Veuillez rentrer un nom'; $validite = FALSE;
         }  
-        if(!isset($mdp) || !is_null($mdp)){
+        if(!isset($mdp) || is_null($mdp)){
             echo 'Veuillez rentrer un mot de passe'; $validite = FALSE;
         }    
             
@@ -84,10 +87,12 @@ function connexion(){
         }
     
         if($validite == true){
-            $co = connexionBD($nom, $mdp);
+            $profil = null;
+            $co = connexionBD($nom, $mdp, $profil);
+            $_SESSION['profil'] = $profil;
             if($co == true){
-                echo 'Connexion réussie';
-                //Se connecter sur le site en tant qu'inscrit
+                $nexturl = "index.php?controle=entreprise&action=accueil_connecte";
+				header("Location:" . $nexturl);
             }
             else{
                 echo "Mauvais mot de passe";
@@ -95,6 +100,20 @@ function connexion(){
         }
     }
  }
+
+function accueil_connecte(){
+    require("vue/accueil_connecte.tpl");
+}
+
+function accueil(){
+    require("vue/accueil.tpl");
+}
+
+function deconnexion(){
+    unset($_SESSION['profil']);
+    $nexturl = "index.php?controle=entreprise&action=accueil";
+    header("Location:" . $nexturl);
+}
 
 
 
