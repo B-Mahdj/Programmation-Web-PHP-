@@ -58,6 +58,8 @@ function inscription(){
 function connexion(){
     require("vue/connexion.tpl");
     
+    var_dump($_POST);
+    
     if((sizeof($_POST)) > 0){
     require("modele/entrepriseBD.php");
     

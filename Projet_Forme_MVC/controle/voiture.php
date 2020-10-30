@@ -3,25 +3,25 @@ function ajouter_voiture(){
     
     require("vue/voiture/inscription_voiture.tpl");
     
-    
     if((sizeof($_POST)) > 0){
         require("modele/voitureBD.php");
         $validite = true;
         $type = $_POST['type'];
-        $photo = $_POST['photo'];
         $energie = $_POST['energie'];
         $vitesse = $_POST['vitesse'];
         $nb_place = $_POST['nb_place'];
+        
+        
         //Données initialisées
-
-        if(!isset($type) || is_null($type)){
+        if(empty($type)){
             echo 'Veuillez rentrer un type'; $validite = false;
         }  
-        if(!isset($photo) || is_null($photo)){
+        if(empty($photo)){
             echo 'Veuillez fournir une photo'; $validite = false;
         }
         
-        if($validite = true){
+        if($validite == true){
+            $photo = $_POST['photo'];
            /*Traiter le JSON SI un des 3 initialisé*/ 
             if(!is_null($energie)||!is_null($vitesse)||!is_null($nb_place)){
                 
