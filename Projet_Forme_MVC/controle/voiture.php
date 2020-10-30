@@ -11,32 +11,32 @@ function ajouter_voiture(){
         $vitesse = $_POST['vitesse'];
         $nb_place = $_POST['nb_place'];
         
-        
         //Données initialisées
         if(empty($type)){
             echo 'Veuillez rentrer un type'; $validite = false;
         }  
-        if(empty($photo)){
+        if(empty($_FILES['photo']['name'])){
             echo 'Veuillez fournir une photo'; $validite = false;
         }
         
         if($validite == true){
-            $photo = $_POST['photo'];
            /*Traiter le JSON SI un des 3 initialisé*/ 
-            if(!is_null($energie)||!is_null($vitesse)||!is_null($nb_place)){
+            
+            $json = null;
+            if(!empty($energie)||!empty($vitesse)||!empty($nb_place)){
                 
                 /*Créer l'array a coder en JSON*/
                 $tableau = array();
                 
-                if(!is_null($energie)){
+                if(!empty($energie)){
                     $tableau_moteur = array("moteur"=>$energie);
                     $tableau = $tableau + $tableau_moteur;
                 }
-                if(!is_null($vitesse)){
+                if(!empty($vitesse)){
                     $tableau_vitesse = array("vitesse"=>$vitesse);
                     $tableau = $tableau + $tableau_vitesse;
                 }
-                if(!is_null($nb_place)){
+                if(!empty($nb_place)){
                     $tableau_place = array("places"=>$nb_place);
                     $tableau = $tableau + $tableau_place;
                 }
@@ -45,10 +45,14 @@ function ajouter_voiture(){
             }
             
             /*Traiter future image*/
-            
+            $chemin = "images/".$_FILES['photo']['tmp_name'];
+            $photo = $chemin . basename($_FILES["photo"]["name"]);
             
             /*SI tout s est bien passé*/
-            ajouter_voitureBD($type, $photo, $json);
+            
+            ajouter_voitureBD($type, $json, $photo, $chemin);
+            
+            unset($_FILES);
         }
         
     }
