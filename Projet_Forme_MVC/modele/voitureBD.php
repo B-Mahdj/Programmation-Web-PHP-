@@ -4,7 +4,6 @@ function ajouter_voitureBD($type, $json, $photo, $chemin){
     require("modele/connectSQL.php");
 
     if(empty($json)){
-        move_uploaded_file($_FILES["photo"]["tmp_name"], $chemin);
         $req = $pdo->prepare('INSERT INTO vehicule (type, location, photo) VALUES(:type, :location, :photo)');
         $req->execute(array(
         'type' => $type,
@@ -13,7 +12,6 @@ function ajouter_voitureBD($type, $json, $photo, $chemin){
     ));
     }
     else{
-        move_uploaded_file($_FILES["photo"]["tmp_name"], $chemin);
         $req = $pdo->prepare('INSERT INTO vehicule (type, caract, location, photo) VALUES(:type, :caract, :location, :photo)');
         $req->execute(array(
         'type' => $type,
@@ -22,7 +20,12 @@ function ajouter_voitureBD($type, $json, $photo, $chemin){
         'photo' => $photo
     ));
     }
-
+    
+    if(!move_uploaded_file($_FILES["photo"]["tmp_name"], $chemin)){
+        echo"Upload image echoué";
+        echo $_FILES["photo"]["error"];
+    }
+    
 }
     
     

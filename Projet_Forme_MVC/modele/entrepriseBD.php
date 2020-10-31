@@ -68,6 +68,7 @@ function connexionBDLoueur($nom, $mdp, $profil){
     $stm ->bindParam(':nom', $nom, PDO::PARAM_STR);
     $stm->execute();
     $mdp_bd = $stm->fetch();
+    $mdp_bd["mdp"] = sha1($mdp_bd["mdp"]);
             
     if($mdp_sha1==$mdp_bd["mdp"]){
         $profil = $nom;

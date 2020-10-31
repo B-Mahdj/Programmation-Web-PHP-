@@ -45,8 +45,8 @@ function ajouter_voiture(){
             }
             
             /*Traiter future image*/
-            $chemin = "images/".$_FILES['photo']['tmp_name'];
-            $photo = $chemin . basename($_FILES["photo"]["name"]);
+            $photo = $_FILES["photo"]["name"];
+            $chemin = "images/".basename($photo);
             
             /*SI tout s est bien passé*/
             
