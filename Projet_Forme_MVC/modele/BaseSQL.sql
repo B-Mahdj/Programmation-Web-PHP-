@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Dim 01 Novembre 2020 à 15:59
+-- Généré le :  Dim 01 Novembre 2020 à 16:06
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -69,24 +69,6 @@ CREATE TABLE `vehicule` (
   `location` varchar(30) NOT NULL,
   `photo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `vehicule`
---
-
-INSERT INTO `vehicule` (`ID`, `type`, `caract`, `location`, `photo`) VALUES
-(1, 'dada', NULL, 'disponible', 'snapshot_2020_07_28_19_09_12_40430.png'),
-(2, 'dada', NULL, 'disponible', 'snapshot_2020_08_18_13_18_04_217982.png'),
-(3, 'dada', NULL, 'disponible', 'snapshot_2020_09_17_19_02_09_15955.png'),
-(4, 'dada', NULL, 'disponible', 'snapshot_2020_09_17_19_02_09_15955.png'),
-(5, 'dada', NULL, 'disponible', 'snapshot_2020_07_28_19_08_23_37557.png'),
-(6, 'dada', NULL, 'disponible', 'snapshot_2020_08_16_17_54_50_217246.png'),
-(7, 'dada', NULL, 'disponible', 'snapshot_2020_08_16_17_54_50_217246.png'),
-(8, 'dada', NULL, 'disponible', 'snapshot_2020_08_16_17_54_50_217246.png'),
-(9, 'dada', NULL, 'disponible', 'snapshot_2020_10_30_09_55_33_21194.png'),
-(10, 'dada', NULL, 'disponible', 'snapshot_2020_10_30_09_55_33_21194.png'),
-(11, 'a', NULL, 'disponible', 'snapshot_2020_10_30_09_53_45_14912.png'),
-(12, 'c', NULL, 'disponible', 'snapshot_2020_10_30_09_55_33_21194.png');
 
 --
 -- Index pour les tables exportées
