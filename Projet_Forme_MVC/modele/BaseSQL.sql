@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Generation Time: Oct 19, 2020 at 02:28 PM
--- Server version: 5.7.24
--- PHP Version: 7.4.1
+-- Client :  localhost
+-- Généré le :  Dim 01 Novembre 2020 à 15:59
+-- Version du serveur :  5.7.11
+-- Version de PHP :  5.6.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pweb_projet`
+-- Base de données :  `pweb_projet`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entreprise`
+-- Structure de la table `entreprise`
 --
 
 CREATE TABLE `entreprise` (
@@ -35,10 +33,17 @@ CREATE TABLE `entreprise` (
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `entreprise`
+--
+
+INSERT INTO `entreprise` (`Id`, `nom`, `mdp`, `email`) VALUES
+(1, 'root', 'root', 'root');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `facturation`
+-- Structure de la table `facturation`
 --
 
 CREATE TABLE `facturation` (
@@ -54,29 +59,47 @@ CREATE TABLE `facturation` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicule`
+-- Structure de la table `vehicule`
 --
 
 CREATE TABLE `vehicule` (
   `ID` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
-  `caract` json NOT NULL,
+  `caract` varchar(255) DEFAULT NULL,
   `location` varchar(30) NOT NULL,
   `photo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Indexes for dumped tables
+-- Contenu de la table `vehicule`
+--
+
+INSERT INTO `vehicule` (`ID`, `type`, `caract`, `location`, `photo`) VALUES
+(1, 'dada', NULL, 'disponible', 'snapshot_2020_07_28_19_09_12_40430.png'),
+(2, 'dada', NULL, 'disponible', 'snapshot_2020_08_18_13_18_04_217982.png'),
+(3, 'dada', NULL, 'disponible', 'snapshot_2020_09_17_19_02_09_15955.png'),
+(4, 'dada', NULL, 'disponible', 'snapshot_2020_09_17_19_02_09_15955.png'),
+(5, 'dada', NULL, 'disponible', 'snapshot_2020_07_28_19_08_23_37557.png'),
+(6, 'dada', NULL, 'disponible', 'snapshot_2020_08_16_17_54_50_217246.png'),
+(7, 'dada', NULL, 'disponible', 'snapshot_2020_08_16_17_54_50_217246.png'),
+(8, 'dada', NULL, 'disponible', 'snapshot_2020_08_16_17_54_50_217246.png'),
+(9, 'dada', NULL, 'disponible', 'snapshot_2020_10_30_09_55_33_21194.png'),
+(10, 'dada', NULL, 'disponible', 'snapshot_2020_10_30_09_55_33_21194.png'),
+(11, 'a', NULL, 'disponible', 'snapshot_2020_10_30_09_53_45_14912.png'),
+(12, 'c', NULL, 'disponible', 'snapshot_2020_10_30_09_55_33_21194.png');
+
+--
+-- Index pour les tables exportées
 --
 
 --
--- Indexes for table `entreprise`
+-- Index pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
   ADD PRIMARY KEY (`Id`);
 
 --
--- Indexes for table `facturation`
+-- Index pour la table `facturation`
 --
 ALTER TABLE `facturation`
   ADD PRIMARY KEY (`ID`,`ide`,`idv`),
@@ -84,44 +107,40 @@ ALTER TABLE `facturation`
   ADD KEY `FK_Vehicule_Facturation` (`idv`);
 
 --
--- Indexes for table `vehicule`
+-- Index pour la table `vehicule`
 --
 ALTER TABLE `vehicule`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT for table `entreprise`
+-- AUTO_INCREMENT pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `facturation`
+-- AUTO_INCREMENT pour la table `facturation`
 --
 ALTER TABLE `facturation`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT for table `vehicule`
+-- AUTO_INCREMENT pour la table `vehicule`
 --
 ALTER TABLE `vehicule`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- Contraintes pour les tables exportées
+--
 
 --
--- Constraints for dumped tables
---
-
---
--- Constraints for table `facturation`
+-- Contraintes pour la table `facturation`
 --
 ALTER TABLE `facturation`
   ADD CONSTRAINT `FK_Entreprise_Facturation` FOREIGN KEY (`ide`) REFERENCES `entreprise` (`Id`),
   ADD CONSTRAINT `FK_Vehicule_Facturation` FOREIGN KEY (`idv`) REFERENCES `vehicule` (`ID`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
