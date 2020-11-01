@@ -1,6 +1,6 @@
 <?php
 
-function ajouter_voitureBD($type, $json, $photo, $chemin){
+function ajouter_voitureBD($type, $json, $photo){
     require("modele/connectSQL.php");
 
     if(empty($json)){
@@ -19,11 +19,6 @@ function ajouter_voitureBD($type, $json, $photo, $chemin){
         'location' => "disponible", //etat de base d'une voiture enregistrée
         'photo' => $photo
     ));
-    }
-    
-    if(!move_uploaded_file($_FILES["photo"]["tmp_name"], $chemin)){
-        echo"Upload image echoué";
-        echo $_FILES["photo"]["error"];
     }
     
 }

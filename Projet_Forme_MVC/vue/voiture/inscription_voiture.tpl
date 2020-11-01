@@ -23,7 +23,7 @@
     Nombre de places (Optionnel)
     <input 	 name="nb_place" 	type="text "><br/>
     Photo
-	<input   name="photo" type="file" id="fileAtelecharger"><br/> 
+	<input   name="photo" type="file"><br/> 
     <input type= "submit"  value="Valider">
 </form>
 
