@@ -34,6 +34,9 @@ function connexionBD($nom, $mdp, $profil){
     $stm ->bindParam(':nom', $nom, PDO::PARAM_STR);
     $stm->execute();
     $mdp_bd = $stm->fetch();
+    
+    var_dump($mdp_bd);
+    var_dump($stm);
             
     if($mdp_sha1==$mdp_bd["mdp"]){
         $profil = $nom;

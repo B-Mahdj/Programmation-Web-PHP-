@@ -89,7 +89,7 @@ function connexion(){
     
         if($validite == true){
             $profil = null;
-            if($nom = "root"){ /*Cas unique de tentative en tant que loueur*/
+            if($nom == "root"){ /*Cas unique de tentative en tant que loueur*/
                 $co = connexionBDLoueur($nom, $mdp, $profil);
                 $_SESSION['profil'] = $profil;
                 if($co == true){
