@@ -130,8 +130,7 @@ function deconnexion(){
 }
 
 function accueil_loueur(){
-    $nexturl = "index.php?controle=voiture&action=ajouter_voiture";
-    header("Location:" . $nexturl);
+    require("vue/accueil_loueur.tpl");
     /*Accueil du loueur ou il pourra réaliser ses propres services*/
 }
 

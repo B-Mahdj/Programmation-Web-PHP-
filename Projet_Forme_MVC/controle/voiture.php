@@ -78,6 +78,13 @@ function ajouter_voiture(){
     
     
 }
+
+function afficher_voiture(){
+    require("modele/voitureBD.php");
+    
+    $ligne = fetch_voitureBD();
+    return $ligne;
+}
     
     
 

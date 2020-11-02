@@ -22,6 +22,16 @@ function ajouter_voitureBD($type, $json, $photo){
     }
     
 }
+
+function fetch_voitureBD(){
+    require("modele/connectSQL.php");
+    
+    $sql = "SELECT * FROM vehicule";
+    $stm = $pdo->prepare($sql);
+    $stm->execute();
+    $ligne = $stm->fetchAll();
+    return $ligne;
+}
     
     
 ?>
