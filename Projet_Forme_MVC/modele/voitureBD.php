@@ -33,8 +33,12 @@ function fetch_voitureBD(){
     return $ligne;
 }
 
-function suppression_voitureBD(){
+function suppression_voitureBD($id){
+    require("modele/connectSQL.php");
     
+    $sql = "DELETE FROM vehicule WHERE id=$id";
+    $stm = $pdo->prepare($sql);
+    $stm->execute();
 }
     
     

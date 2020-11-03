@@ -84,8 +84,8 @@ function afficher_voiture(){
 
 function suppression_voiture($index){
     $ligne = afficher_voiture();
-    $taille = sizeof($ligne);
-    suppression_voitureBD();
+    $id_a_supp = $ligne[$index]['ID'];
+    suppression_voitureBD($id_a_supp);
     
     /*On recharge la dernière page*/
     $nexturl = "index.php?controle=entreprise&action=accueil_loueur";

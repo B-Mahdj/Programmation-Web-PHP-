@@ -22,15 +22,17 @@
 <?php
     while($i<$taille){
         /*Afficher caractéristiques*/
-        $caract = json_decode($ligne[$i]['caract']);
-        echo $ligne[$i]['type']. " ".$ligne[$i]['location']. " ".$caract->{'moteur'}. " ".$caract->{'vitesse'}. " ".$caract->{'places'};
+        echo $ligne[$i]['type'];
+        if(!is_null($ligne[$i]['caract'])){
+            $caract = json_decode($ligne[$i]['caract']);
+            echo $ligne[$i]['location']. " ".$caract->{'moteur'}. " ".$caract->{'vitesse'}. " ".$caract->{'places'};
+        }
         /*Afficher Image*/
         echo "<img src='images/".$ligne[$i]['photo']."' >";
-        $i++;
         echo "
             <a href='index.php?controle=voiture&action=suppression_voiture&param1=$i'><img class ='delete' src='vue/icons/delete.svg'/></a>";
+        $i++;
      }
-
 ?>
     
 </div>

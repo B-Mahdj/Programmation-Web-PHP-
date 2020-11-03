@@ -28,7 +28,7 @@
 </form>
 
 <div class = "lien">
-<a href = "index.php">Retour au site</a>
+<a href = "index.php?controle=entreprise&action=accueil_loueur">Retour au site</a>
 </div>
     
 </div>
