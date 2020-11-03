@@ -1,6 +1,5 @@
 <?php 
 function ajouter_voiture(){
-    
     require("vue/voiture/inscription_voiture.tpl");
     
     if((sizeof($_POST)) > 0){
@@ -73,10 +72,7 @@ function ajouter_voiture(){
             
             ajouter_voitureBD($type, $json, $photo);
         }
-        
     }
-    
-    
 }
 
 function afficher_voiture(){
@@ -84,6 +80,16 @@ function afficher_voiture(){
     
     $ligne = fetch_voitureBD();
     return $ligne;
+}
+
+function suppression_voiture($index){
+    $ligne = afficher_voiture();
+    $taille = sizeof($ligne);
+    suppression_voitureBD();
+    
+    /*On recharge la dernière page*/
+    $nexturl = "index.php?controle=entreprise&action=accueil_loueur";
+    header("Location:" . $nexturl);
 }
     
     

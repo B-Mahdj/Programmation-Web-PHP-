@@ -32,6 +32,10 @@ function fetch_voitureBD(){
     $ligne = $stm->fetchAll();
     return $ligne;
 }
+
+function suppression_voitureBD(){
+    
+}
     
     
 ?>

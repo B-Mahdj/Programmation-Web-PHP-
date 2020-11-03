@@ -130,7 +130,7 @@ function deconnexion(){
 }
 
 function accueil_loueur(){
-    require("vue/accueil_loueur.tpl");
+    require("vue/loueur/accueil_loueur.tpl");
     /*Accueil du loueur ou il pourra réaliser ses propres services*/
 }
 
