@@ -123,6 +123,10 @@ function accueil(){
     require("vue/accueil.tpl");
 }
 
+function accueil_default(){
+    require("vue/accueil_default.tpl");
+}
+
 function deconnexion(){
     unset($_SESSION['profil']);
     $nexturl = "index.php?controle=entreprise&action=accueil";

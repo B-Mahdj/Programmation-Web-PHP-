@@ -19,8 +19,7 @@ function ajouter_voiture(){
         }
         if($_FILES['photo']['error'] != 0){ /*Erreur lors de l'upload*/
             if($_FILES['photo']['error'] == 1){
-                /*Une valeur erreur de 1 stipule que le fichier est trop grand 
-                par rapport a la taille fixee par le fichier php.ini*/
+                /*Une valeur erreur de 1 stipule que le fichier est trop grand par rapport a la taille fixee par le fichier php.ini*/
                 echo"Votre fichier est trop grand";$validite = false;  
             }
             else{
@@ -34,15 +33,15 @@ function ajouter_voiture(){
             $extension_image = strtolower(end($ext));
 
             if($extension_image != "jpg" && $extension_image != "png" && $extension_image != "jpeg") {
-                echo "Seulement les images sont autorisees";$validite = false;
+                echo "Seulement les images au format jpg, png et jpeg sont autorisees";$validite = false;
             }
             else{
                 $chemin = "images/".basename($photo);
                 if(!move_uploaded_file($_FILES["photo"]["tmp_name"], $chemin)){
                     echo"Upload image echoué";$validite = false;
                 }
+                }
             }
-        }
         
         
         if($validite == true){

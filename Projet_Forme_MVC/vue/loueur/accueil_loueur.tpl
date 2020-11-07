@@ -22,7 +22,7 @@
 <?php
     while($i<$taille){
         /*Afficher caractéristiques*/
-        echo $ligne[$i]['type'];
+        echo $ligne[$i]['type']. " ";
         if(!is_null($ligne[$i]['caract'])){
             $caract = json_decode($ligne[$i]['caract']);
             echo $ligne[$i]['location']. " ".$caract->{'moteur'}. " ".$caract->{'vitesse'}. " ".$caract->{'places'};
