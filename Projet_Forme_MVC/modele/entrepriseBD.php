@@ -1,7 +1,7 @@
 <?php 
 	/* Fonctions-modèle réalisant les requetes de gestion des entreprises en base de données */
 
-function inscriptionBD($nom, $mdp, $email, $profil){
+function inscriptionBD($nom, $mdp, $email){
     
     require("modele/connectSQL.php");
     
@@ -12,15 +12,13 @@ function inscriptionBD($nom, $mdp, $email, $profil){
         'mdp' => $mdp,
         'email' => $email
     ));
-    
-    $profil = $nom;
     }
     else{
         echo 'Cet utilisateur existe deja'; 
     }
 }
 
-function connexionBD($nom, $mdp, $profil){
+function connexionBD($nom, $mdp){
     
     require("modele/connectSQL.php");
     
@@ -34,12 +32,8 @@ function connexionBD($nom, $mdp, $profil){
     $stm ->bindParam(':nom', $nom, PDO::PARAM_STR);
     $stm->execute();
     $mdp_bd = $stm->fetch();
-    
-    var_dump($mdp_bd);
-    var_dump($stm);
             
     if($mdp_sha1==$mdp_bd["mdp"]){
-        $profil = $nom;
         return true;
     }
     else{
@@ -61,7 +55,7 @@ function verif_ident($nom, $pdo){
     }
 }
 
-function connexionBDLoueur($nom, $mdp, $profil){
+function connexionBDLoueur($nom, $mdp){
     require("modele/connectSQL.php");
     
     $mdp_sha1 = sha1($mdp);
@@ -74,12 +68,21 @@ function connexionBDLoueur($nom, $mdp, $profil){
     $mdp_bd["mdp"] = sha1($mdp_bd["mdp"]);
             
     if($mdp_sha1==$mdp_bd["mdp"]){
-        $profil = $nom;
         return true;
     }
     else{
         return false;
     }
+}
+
+function getIdbyNameBd($nom){
+    require("modele/connectSQL.php");
+    $sql = "SELECT id FROM entreprise WHERE nom=:nom";
+    $stm = $pdo->prepare($sql);
+    $stm ->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $stm->execute();
+    $id = $stm->fetch();
+    return $id['id'];
 }
 
 ?>

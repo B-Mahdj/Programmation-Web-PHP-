@@ -1,9 +1,8 @@
 <?php
 
 session_start ();
-
 if(count ($_GET) == 0){
-    if ((!isset($_SESSION['profil'])) || count($_GET)==0)	{               //personne non connectee
+    if ((!isset($_SESSION['profil'])) || (is_null($_SESSION['profil'])) || count($_GET)==0)	{               //personne non connectee
         require("./vue/accueil.tpl"); //charge la page d'accueil
     }
     else{ //personne connectee 

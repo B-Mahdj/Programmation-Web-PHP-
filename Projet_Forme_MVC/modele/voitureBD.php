@@ -33,12 +33,35 @@ function fetch_voitureBD(){
     return $ligne;
 }
 
+function fetch_voitureBD_dispo(){
+    require("modele/connectSQL.php");
+    
+    $sql = "SELECT * FROM vehicule WHERE location='disponible'";
+    $stm = $pdo->prepare($sql);
+    $stm->execute();
+    $ligne = $stm->fetchAll();
+    return $ligne;
+}
+
 function suppression_voitureBD($id){
     require("modele/connectSQL.php");
     
     $sql = "DELETE FROM vehicule WHERE id=$id";
     $stm = $pdo->prepare($sql);
     $stm->execute();
+}
+
+function reservation_voitureBD($id_v, $id_e, $datedebut, $datefin, $valeur){
+    require("modele/connectSQL.php");
+    $req = $pdo->prepare('INSERT INTO facturation (ide, idv, dateD, dateF, valeur, etat) VALUES(:ide, :idv, :dateD, :dateF, :valeur, :etat)');
+        $req->execute(array(
+        'ide' => $id_e,
+        'idv' => $id_v,
+        'dateD' => $datedebut, 
+        'dateF' => $datefin,
+        'valeur' => $valeur,
+        'etat' => 1 
+    ));
 }
     
     

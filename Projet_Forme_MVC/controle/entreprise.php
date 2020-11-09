@@ -46,9 +46,8 @@ function inscription(){
         $mdp = sha1($mdp);
     
         if($validite == true){
-            $profil = null;
-            inscriptionBD($nom, $mdp, $email, $profil);
-            $_SESSION['profil'] = $profil;
+            inscriptionBD($nom, $mdp, $email);
+            $_SESSION['profil'] = $nom;
             $nexturl = "index.php?controle=entreprise&action=accueil_connecte";
             header("Location:" . $nexturl);//charge page pour personne connectee 
         }
@@ -88,24 +87,23 @@ function connexion(){
         }
     
         if($validite == true){
-            $profil = null;
             if($nom == "root"){ /*Cas unique de tentative en tant que loueur*/
-                $co = connexionBDLoueur($nom, $mdp, $profil);
-                $_SESSION['profil'] = $profil;
+                $co = connexionBDLoueur($nom, $mdp);
                 if($co == true){
                     $nexturl = "index.php?  controle=entreprise&action=accueil_loueur";
 				    header("Location:" . $nexturl);
+                    $_SESSION['profil'] = $nom;
                 }
                 else{
                     echo "Mauvais mot de passe";
                 }
             }
             else {
-                $co = connexionBD($nom, $mdp, $profil); 
-                $_SESSION['profil'] = $profil;
+                $co = connexionBD($nom, $mdp); 
                 if($co == true){
                     $nexturl = "index.php?  controle=entreprise&action=accueil_connecte";
 				    header("Location:" . $nexturl);
+                    $_SESSION['profil'] = $nom;
                 }
                 else{
                     echo "Mauvais mot de passe";
@@ -128,7 +126,7 @@ function accueil_default(){
 }
 
 function deconnexion(){
-    unset($_SESSION['profil']);
+    $_SESSION['profil'] = null;
     $nexturl = "index.php?controle=entreprise&action=accueil";
     header("Location:" . $nexturl);
 }
@@ -138,7 +136,11 @@ function accueil_loueur(){
     /*Accueil du loueur ou il pourra réaliser ses propres services*/
 }
 
-
+function getIdbyName($nom){
+    require("modele/entrepriseBD.php");
+    $id = getIdbyNameBd($nom);
+    return $id;
+}
 
 
 

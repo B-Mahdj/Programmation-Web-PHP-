@@ -81,6 +81,13 @@ function afficher_voiture(){
     return $ligne;
 }
 
+function afficher_voiture_dispo(){
+    require("modele/voitureBD.php");
+    
+    $ligne = fetch_voitureBD_dispo();
+    return $ligne;
+}
+
 function suppression_voiture($index){
     $ligne = afficher_voiture();
     $id_a_supp = $ligne[$index]['ID'];
@@ -90,7 +97,28 @@ function suppression_voiture($index){
     $nexturl = "index.php?controle=entreprise&action=accueil_loueur";
     header("Location:" . $nexturl);
 }
+
+function reservation_voiture($index){
+    $ligne = afficher_voiture_dispo();
+    $id_voiture = $ligne[$index]['ID'];
     
+    /*Récupérer l'id de l'entreprise via $_SESSION*/
+    require("controle/entreprise.php");
+    $id_entreprise = getIdbyName($_SESSION['profil']);
+    
+    
+    require("vue/voiture/reservation_voiture.tpl");
+    /*Vue qui permet de rentrer la date debut et fin de la locationpar la personne*/
+    if((sizeof($_POST)) > 0){
+        if(empty($datedebut) || empty($datefin) || empty($valeur)){
+        echo "Veuillez remplir tous les champs";
+    }
+    else{
+        /*La valeur a payer sera de (30*nbjours ?) */
+        reservation_voitureBD($id_voiture, $id_entreprise, $datedebut, $datefin, $valeur);   
+    }
+    }
+}
     
 
 ?>

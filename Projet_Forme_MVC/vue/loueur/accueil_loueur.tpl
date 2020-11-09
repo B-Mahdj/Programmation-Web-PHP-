@@ -25,7 +25,15 @@
         echo $ligne[$i]['type']. " ";
         if(!is_null($ligne[$i]['caract'])){
             $caract = json_decode($ligne[$i]['caract']);
-            echo $ligne[$i]['location']. " ".$caract->{'moteur'}. " ".$caract->{'vitesse'}. " ".$caract->{'places'};
+        if(!empty($caract->{'moteur'})){
+            echo $caract->{'moteur'}. " ";
+        }
+        if(!empty($caract->{'vitesse'})){
+            echo $caract->{'vitesse'}. " ";
+        }
+        if(!empty($caract->{'places'})){
+            echo $caract->{'places'};
+        }
         }
         /*Afficher Image*/
         echo "<img src='images/".$ligne[$i]['photo']."' >";
@@ -37,7 +45,7 @@
     
 </div>
     
-    <br>
+<br>
     
 <a href="index.php?controle=voiture&action=ajouter_voiture">Ajout Voiture</a>
 

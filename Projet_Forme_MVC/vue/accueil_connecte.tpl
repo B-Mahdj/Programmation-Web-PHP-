@@ -18,71 +18,39 @@
 				<h1 class="display-2">Venez louer une voiture de votre choix dès maintenant !</h1>
 			</div>
 		</div>
+        
 		
-		<div class=container>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-						<img src="./vue/Images/peugeot-207.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Peugeot 207</h5>
-							<a href="#" class="btn btn-primary">Louer voiture</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-						<img src="./vue/Images/volkswagen-golf.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Volkswagen Golf</h5>
-							<a href="#" class="btn btn-primary">Louer voiture</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-						<img src="./vue/Images/citroen-c3.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Citroën C3</h5>
-							<a href="#" class="btn btn-primary">Louer voiture</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-		</div>
-		<div class=container>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-						<img src="./vue/Images/nissan-gtr.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Nissan GTR</h5>
-							<a href="#" class="btn btn-primary">Louer voiture</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-						<img src="./vue/Images/renault-clio.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Renault Clio</h5>
-							<a href="#" class="btn btn-primary">Louer voiture</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card" style="width: 18rem;">
-						<img src="./vue/Images/mercedes.jpg" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Mercedes Classe C</h5>
-							<a href="#" class="btn btn-primary">Louer voiture</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-		</div>
+        <?php
+        require("controle/voiture.php");
+        $ligne = afficher_voiture_dispo();
+        $taille = sizeof($ligne);
+        $i = 0;
+        if($taille != 0){
+            while($i<$taille){
+            /*Afficher caractéristiques*/
+            echo $ligne[$i]['type']. " ";
+            if(!is_null($ligne[$i]['caract'])){
+                $caract = json_decode($ligne[$i]['caract']);
+            if(!empty($caract->{'moteur'})){
+                echo $caract->{'moteur'}. " ";
+            }
+            if(!empty($caract->{'vitesse'})){
+                echo $caract->{'vitesse'}. " ";
+            }
+            if(!empty($caract->{'places'})){
+                echo $caract->{'places'};
+            }
+            }
+            /*Afficher Image*/
+            echo "<img width='286' height='160' src='images/".$ligne[$i]['photo']."' >";
+            echo "<a href='index.php?controle=voiture&action=reservation_voiture&param1=$i'>Louer une Voiture</a>";
+            $i++;
+            }
+        }
+        else{ //Aucune Voiture n'est disponible pour la location
+            echo "Aucune voiture n'est disponible actuellement";
+        }
+        ?>   
 	</body>
 	
 </html>
