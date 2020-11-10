@@ -21,7 +21,7 @@
         
 		
         <?php
-        require("controle/voiture.php");
+        require_once("controle/voiture.php");
         $ligne = afficher_voiture_dispo();
         $taille = sizeof($ligne);
         $i = 0;
@@ -43,12 +43,18 @@
             }
             /*Afficher Image*/
             echo "<img width='286' height='160' src='images/".$ligne[$i]['photo']."' >";
-            echo "<a href='index.php?controle=voiture&action=reservation_voiture&param1=$i'>Louer une Voiture</a>";
+            echo "<form action='index.php?controle=voiture&action=reservation_voiture&param1=$i' method='post'>";
+            echo "Date Debut";
+            echo"<input name='datedebut' type='date'><br/>";
+            echo "Date Fin";
+	        echo "<input  name='datefin' type='date'><br/>";
+            echo "<input type= 'submit'  value='Louer la Voiture'>";
+            echo "</form>";
             $i++;
             }
         }
         else{ //Aucune Voiture n'est disponible pour la location
-            echo "Aucune voiture n'est disponible actuellement";
+            echo "Aucune voiture est disponible actuellement";
         }
         ?>   
 	</body>

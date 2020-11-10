@@ -62,6 +62,11 @@ function reservation_voitureBD($id_v, $id_e, $datedebut, $datefin, $valeur){
         'valeur' => $valeur,
         'etat' => 1 
     ));
+        $req = $pdo->prepare('UPDATE VEHICULE SET location=:ide WHERE ID=:id_v');
+        $req->execute(array(
+        'ide' => $id_e,
+        'id_v' => $id_v
+    ));
 }
     
     

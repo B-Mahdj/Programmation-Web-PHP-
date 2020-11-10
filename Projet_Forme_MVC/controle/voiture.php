@@ -99,26 +99,47 @@ function suppression_voiture($index){
 }
 
 function reservation_voiture($index){
+    date_default_timezone_set('UTC');
     $ligne = afficher_voiture_dispo();
     $id_voiture = $ligne[$index]['ID'];
     
     /*Récupérer l'id de l'entreprise via $_SESSION*/
-    require("controle/entreprise.php");
+    require_once("controle/entreprise.php");
     $id_entreprise = getIdbyName($_SESSION['profil']);
-    
-    
-    require("vue/voiture/reservation_voiture.tpl");
-    /*Vue qui permet de rentrer la date debut et fin de la locationpar la personne*/
+
     if((sizeof($_POST)) > 0){
-        if(empty($datedebut) || empty($datefin) || empty($valeur)){
-        echo "Veuillez remplir tous les champs";
+    date_default_timezone_set('UTC');
+    $datedebut = $_POST['datedebut'];
+    $datefin = $_POST['datefin'];
+    $validite = true;
+    if(empty($datedebut) || empty($datefin)){
+        echo "Veuillez remplir tous les champs";$validite = false;
+        $nexturl = "index.php";
+        header("Location:" . $nexturl);//charge page pour personne connectee 
     }
-    else{
-        /*La valeur a payer sera de (30*nbjours ?) */
-        reservation_voitureBD($id_voiture, $id_entreprise, $datedebut, $datefin, $valeur);   
+    $datedebut = strtotime($datedebut);
+    $datefin = strtotime($datefin);
+    if($datefin - $datedebut <0){
+        echo"Veuillez rentrez des dates valides";$validite = false;
+        $nexturl = "index.php";
+        header("Location:" . $nexturl);//charge page pour personne connectee 
     }
+    if($validite == true){
+        $dates = array($datedebut, $datefin);
+                
+        $datedebut = $dates[0];
+        $datefin = $dates[1];
+
+        $valeur = abs($datefin - $datedebut);
+        /*Conversion en nombre de jours*/
+        $valeur = $valeur/(60 * 60 * 24);
+        $valeur = $valeur*30; /*Prix = Nombre de jours * 30*/
+        
+        reservation_voitureBD($id_voiture, $id_entreprise, $datedebut, $datefin, $valeur);
+        $nexturl = "index.php";
+        header("Location:" . $nexturl);//charge page pour personne connectee 
     }
-}
-    
+    } 
+}    
 
 ?>
