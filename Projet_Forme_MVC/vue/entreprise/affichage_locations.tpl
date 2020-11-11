@@ -3,19 +3,21 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Affichage Voiture</title>
+  <title>Affichage Locations</title>
   <link rel="stylesheet" href="./vue/styleCSS/style_accueil_loueur.css">
 </head>
 
 <body>
 <div class = "formulaire">
-<h3>Affichage Voiture</h3>
+<h3>Affichage Locations</h3>
     
 <?php
     require_once("controle/voiture.php");
-    $ligne = afficher_voiture();
+    $ligne = afficher_voiture_louee();
     $taille = sizeof($ligne);
     $i = 0;
+    require_once("controle/entreprise.php");
+    $liste_entreprise = liste_entreprise();
 ?>
     
 <div class = "caracteristiques">
@@ -37,8 +39,9 @@
         }
         /*Afficher Image*/
         echo "<img src='images/".$ligne[$i]['photo']."' >";
-        echo "
-            <a href='index.php?controle=voiture&action=suppression_voiture&param1=$i'><img class ='delete' src='vue/icons/delete.svg'/></a>";
+        $l = $ligne[$i]['location'] -1;
+        $nom = $liste_entreprise[$l][1];
+        echo "Louer par l'entreprise de nom : $nom";
         $i++;
      }
 ?>

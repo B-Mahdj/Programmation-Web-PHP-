@@ -152,4 +152,11 @@ function reservation_voiture($index){
     } 
 }
 
+function afficher_voiture_louee(){
+    require("modele/voitureBD.php");
+    
+    $liste = afficher_voiture_loueeBD();
+    return $liste;
+}
+
 ?>

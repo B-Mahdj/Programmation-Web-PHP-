@@ -53,6 +53,17 @@ function afficher_voiture_louer_byEntrepriseBD($id_e){
     return $ligne;
 }
 
+function  afficher_voiture_loueeBD(){
+    require("modele/connectSQL.php");
+    
+    $sql = "SELECT * FROM vehicule WHERE location<>'disponible'";
+    $stm = $pdo->prepare($sql);
+    $stm ->bindParam(':ide', $id_e, PDO::PARAM_STR);
+    $stm->execute();
+    $ligne = $stm->fetchAll();
+    return $ligne;
+}
+
 function suppression_voitureBD($id){
     require("modele/connectSQL.php");
     

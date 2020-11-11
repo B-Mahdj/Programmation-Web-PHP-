@@ -84,4 +84,13 @@ function getIdbyNameBd($nom){
     return $id['id'];
 }
 
+function liste_entrepriseBD(){
+    require("modele/connectSQL.php");
+    $sql = "SELECT * FROM entreprise";
+    $stm = $pdo->prepare($sql);
+    $stm->execute();
+    $liste = $stm->fetchAll();
+    return $liste;
+}
+
 ?>

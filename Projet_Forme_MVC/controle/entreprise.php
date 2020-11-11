@@ -113,6 +113,12 @@ function connexion(){
     }
  }
 
+function liste_entreprise(){
+    require("modele/entrepriseBD.php");
+    $liste = liste_entrepriseBD();
+    return $liste;
+}
+
 function accueil_connecte(){
     require("vue/accueil_connecte.tpl");
 }
@@ -144,6 +150,10 @@ function getIdbyName($nom){
 
 function affichage_locations_session(){
     require("vue/entreprise/affichage_voiture.tpl");
+}
+
+function affichage_locations(){
+    require("vue/entreprise/affichage_locations.tpl");
 }
 
 
