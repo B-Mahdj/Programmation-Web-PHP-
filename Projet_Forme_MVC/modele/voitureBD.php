@@ -20,7 +20,6 @@ function ajouter_voitureBD($type, $json, $photo){
         'photo' => $photo
     ));
     }
-    
 }
 
 function fetch_voitureBD(){
@@ -38,6 +37,17 @@ function fetch_voitureBD_dispo(){
     
     $sql = "SELECT * FROM vehicule WHERE location='disponible'";
     $stm = $pdo->prepare($sql);
+    $stm->execute();
+    $ligne = $stm->fetchAll();
+    return $ligne;
+}
+
+function afficher_voiture_louer_byEntrepriseBD($id_e){
+    require("modele/connectSQL.php");
+    
+    $sql = "SELECT * FROM vehicule WHERE location=:ide";
+    $stm = $pdo->prepare($sql);
+    $stm ->bindParam(':ide', $id_e, PDO::PARAM_STR);
     $stm->execute();
     $ligne = $stm->fetchAll();
     return $ligne;
@@ -68,6 +78,7 @@ function reservation_voitureBD($id_v, $id_e, $datedebut, $datefin, $valeur){
         'id_v' => $id_v
     ));
 }
+
     
     
 ?>

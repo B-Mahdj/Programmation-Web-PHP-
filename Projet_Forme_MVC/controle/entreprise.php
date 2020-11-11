@@ -142,6 +142,10 @@ function getIdbyName($nom){
     return $id;
 }
 
+function affichage_locations_session(){
+    require("vue/entreprise/affichage_voiture.tpl");
+}
+
 
 
 

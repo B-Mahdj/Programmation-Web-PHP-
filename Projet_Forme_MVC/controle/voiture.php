@@ -88,6 +88,16 @@ function afficher_voiture_dispo(){
     return $ligne;
 }
 
+/*Fonction qui permet d'afficher les locations de l'entreprise en session sur le site*/
+function afficher_voiture_louer_byEntreprise($nom){
+    require_once("controle/entreprise.php");
+    $id_e = getIdbyName($nom);
+    
+    require("modele/voitureBD.php");
+    $liste = afficher_voiture_louer_byEntrepriseBD($id_e);
+    return $liste;
+}
+
 function suppression_voiture($index){
     $ligne = afficher_voiture();
     $id_a_supp = $ligne[$index]['ID'];
@@ -140,6 +150,6 @@ function reservation_voiture($index){
         header("Location:" . $nexturl);//charge page pour personne connectee 
     }
     } 
-}    
+}
 
 ?>

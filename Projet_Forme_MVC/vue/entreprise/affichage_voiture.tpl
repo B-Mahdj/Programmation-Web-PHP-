@@ -11,8 +11,7 @@
         
 		<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
 			<a class="navbar-brand">Application loueur de voitures</a>
-            <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?controle=entreprise&action=affichage_locations_session">Affichage Locations Actuelles</a>
-            <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?controle=entreprise&action=deconnexion" role="button">Deconnexion</a>  
+            <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?controle=entreprise&action=deconnexion" role="button">Deconnexion</a> 
 		</nav>
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
@@ -23,14 +22,13 @@
 		
         <?php
         require_once("controle/voiture.php");
-        $ligne = afficher_voiture_dispo();
+        $ligne = afficher_voiture_louer_byEntreprise($_SESSION['profil']);
         $taille = sizeof($ligne);
         $i = 0;
         if($taille != 0){
-            echo "Veuillez réserver une voiture à la fois";
             while($i<$taille){
             /*Afficher caractéristiques*/
-            echo $ligne[$i]['type']. " ";
+            echo $ligne[$i]['type'];
             if(!is_null($ligne[$i]['caract'])){
                 $caract = json_decode($ligne[$i]['caract']);
             if(!empty($caract->{'moteur'})){
@@ -45,13 +43,6 @@
             }
             /*Afficher Image*/
             echo "<img width='286' height='160' src='images/".$ligne[$i]['photo']."' >";
-            echo "<form action='index.php?controle=voiture&action=reservation_voiture&param1=$i' method='post'>";
-            echo "Date Debut";
-            echo"<input name='datedebut' type='date'><br/>";
-            echo "Date Fin";
-	        echo "<input  name='datefin' type='date'><br/>";
-            echo "<input type= 'submit'  value='Louer la Voiture'>";
-            echo "</form>";
             $i++;
             }
         }
