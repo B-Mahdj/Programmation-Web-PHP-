@@ -123,6 +123,9 @@ ALTER TABLE `vehicule`
 ALTER TABLE `facturation`
   ADD CONSTRAINT `FK_Entreprise_Facturation` FOREIGN KEY (`ide`) REFERENCES `entreprise` (`Id`),
   ADD CONSTRAINT `FK_Vehicule_Facturation` FOREIGN KEY (`idv`) REFERENCES `vehicule` (`ID`);
+  
+  
+  ALTER TABLE `facturation` DROP FOREIGN KEY `FK_Entreprise_Facturation`; ALTER TABLE `facturation` ADD CONSTRAINT `FK_Entreprise_Facturation` FOREIGN KEY (`ide`) REFERENCES `entreprise`(`Id`) ON DELETE CASCADE ON UPDATE RESTRICT; ALTER TABLE `facturation` DROP FOREIGN KEY `FK_Vehicule_Facturation`; ALTER TABLE `facturation` ADD CONSTRAINT `FK_Vehicule_Facturation` FOREIGN KEY (`idv`) REFERENCES `vehicule`(`ID`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
