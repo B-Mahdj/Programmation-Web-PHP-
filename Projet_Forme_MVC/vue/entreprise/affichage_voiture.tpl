@@ -13,9 +13,9 @@
 			<a class="navbar-brand">Application loueur de voitures</a>
             <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?controle=entreprise&action=deconnexion" role="button">Deconnexion</a> 
 		</nav>
-		<div class="jumbotron jumbotron-fluid">
+		<div class="jumbotron jumbotron-fluid" style="background-color: #42B3F3">
 			<div class="container">
-				<h1 class="display-2">Venez louer une voiture de votre choix dès maintenant !</h1>
+				<h1 class="display-2">Affichage des voitures louées</h1>
 			</div>
 		</div>
         
@@ -27,24 +27,29 @@
         $i = 0;
         if($taille != 0){
             while($i<$taille){
-            /*Afficher caractéristiques*/
-            echo $ligne[$i]['type'];
-            if(!is_null($ligne[$i]['caract'])){
-                $caract = json_decode($ligne[$i]['caract']);
-            if(!empty($caract->{'moteur'})){
-                echo $caract->{'moteur'}. " ";
-            }
-            if(!empty($caract->{'vitesse'})){
-                echo $caract->{'vitesse'}. " ";
-            }
-            if(!empty($caract->{'places'})){
-                echo $caract->{'places'};
-            }
-            }
-            /*Afficher Image*/
-            echo "<img width='286' height='160' src='images/".$ligne[$i]['photo']."' >";
-            $i++;
-            }
+						echo "<div class='col-md-4'>
+								<div class='card' style='width: 18rem;'>
+									<img width='286' height='160' src='images/".$ligne[$i]['photo']."' class='card-img-top' alt='...'>
+									<div class='card-body'>
+										<h4 class='card-title'>".$ligne[$i]['type']."</h4>";
+								if(!is_null($ligne[$i]['caract'])){
+									$caract = json_decode($ligne[$i]['caract']);
+								if(!empty($caract->{'moteur'})){
+									echo "<h6 class='card-title'>".$caract->{'moteur'}. "</h6>";
+								}
+								if(!empty($caract->{'vitesse'})){
+									echo "<h6 class='card-title'>".$caract->{'vitesse'}. "</h6>";
+								}
+								if(!empty($caract->{'places'})){
+									echo "<h6 class='card-title'>".$caract->{'places'}." places</h6>";
+								}
+								}
+								echo"
+								</div>
+							</div>
+						</div>";
+						$i++;
+					}
         }
         else{ //Aucune Voiture n'est disponible pour la location
             echo "Aucune voiture est disponible actuellement";

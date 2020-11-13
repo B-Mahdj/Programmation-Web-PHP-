@@ -17,8 +17,6 @@
 		<div class="jumbotron jumbotron-fluid" style="background-color: #42B3F3">
 			<div class="container">
 				<h1 class="display-2">Venez louer une voiture de votre choix dès maintenant !</h1>
-				<hr class="my-4">
-				<h5>Veuillez réserver une voiture à la fois.</p>
 			</div>
 		</div>
         
