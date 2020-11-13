@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mer 11 Novembre 2020 à 13:07
+-- Généré le :  Dim 01 Novembre 2020 à 16:06
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -38,7 +38,7 @@ CREATE TABLE `entreprise` (
 --
 
 INSERT INTO `entreprise` (`Id`, `nom`, `mdp`, `email`) VALUES
-(1, 'root', 'dc76e9f0c0006e8f919e0c515c66dbba3982f785', 'root');
+(1, 'root', 'root', 'root');
 
 -- --------------------------------------------------------
 
@@ -50,8 +50,8 @@ CREATE TABLE `facturation` (
   `ID` int(11) NOT NULL,
   `ide` int(11) NOT NULL,
   `idv` int(11) NOT NULL,
-  `dateD` varchar(255) NOT NULL,
-  `dateF` varchar(255) NOT NULL,
+  `dateD` date NOT NULL,
+  `dateF` date NOT NULL,
   `valeur` int(11) NOT NULL,
   `etat` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -112,7 +112,7 @@ ALTER TABLE `facturation`
 -- AUTO_INCREMENT pour la table `vehicule`
 --
 ALTER TABLE `vehicule`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Contraintes pour les tables exportées
 --

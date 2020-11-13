@@ -67,11 +67,6 @@ function  afficher_voiture_loueeBD(){
 function suppression_voitureBD($id){
     require("modele/connectSQL.php");
     
-    /*Delete Cle Etrangeres si elles existent*/
-    $sql = "DELETE FROM FACTURATION WHERE idv=$id";
-    $stm = $pdo->prepare($sql);
-    $stm->execute();
-    
     $sql = "DELETE FROM vehicule WHERE id=$id";
     $stm = $pdo->prepare($sql);
     $stm->execute();

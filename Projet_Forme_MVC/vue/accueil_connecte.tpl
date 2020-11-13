@@ -14,51 +14,59 @@
             <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?controle=entreprise&action=affichage_locations_session">Affichage Locations Actuelles</a>
             <a class="btn btn-outline-success my-2 my-sm-0" href="index.php?controle=entreprise&action=deconnexion" role="button">Deconnexion</a>  
 		</nav>
-		<div class="jumbotron jumbotron-fluid">
+		<div class="jumbotron jumbotron-fluid" style="background-color: #42B3F3">
 			<div class="container">
 				<h1 class="display-2">Venez louer une voiture de votre choix dès maintenant !</h1>
+				<hr class="my-4">
+				<h5>Veuillez réserver une voiture à la fois.</p>
 			</div>
 		</div>
         
-		
-        <?php
-        require_once("controle/voiture.php");
-        $ligne = afficher_voiture_dispo();
-        $taille = sizeof($ligne);
-        $i = 0;
-        if($taille != 0){
-            echo "Veuillez réserver une voiture à la fois";
-            while($i<$taille){
-            /*Afficher caractéristiques*/
-            echo $ligne[$i]['type']. " ";
-            if(!is_null($ligne[$i]['caract'])){
-                $caract = json_decode($ligne[$i]['caract']);
-            if(!empty($caract->{'moteur'})){
-                echo $caract->{'moteur'}. " ";
-            }
-            if(!empty($caract->{'vitesse'})){
-                echo $caract->{'vitesse'}. " ";
-            }
-            if(!empty($caract->{'places'})){
-                echo $caract->{'places'};
-            }
-            }
-            /*Afficher Image*/
-            echo "<img width='286' height='160' src='images/".$ligne[$i]['photo']."' >";
-            echo "<form action='index.php?controle=voiture&action=reservation_voiture&param1=$i' method='post'>";
-            echo "Date Debut";
-            echo"<input name='datedebut' type='date'><br/>";
-            echo "Date Fin";
-	        echo "<input  name='datefin' type='date'><br/>";
-            echo "<input type= 'submit'  value='Louer la Voiture'>";
-            echo "</form>";
-            $i++;
-            }
-        }
-        else{ //Aucune Voiture n'est disponible pour la location
-            echo "Aucune voiture est disponible actuellement";
-        }
-        ?>   
+		<div class=container>
+			<div class="row">
+				<?php
+				require_once("controle/voiture.php");
+				$ligne = afficher_voiture_dispo();
+				$taille = sizeof($ligne);
+				$i = 0;
+				if($taille != 0){
+					while($i<$taille){
+				   echo "<div class='col-md-4'>
+							<div class='card' style='width: 18rem;'>
+								<img width='286' height='160' src='images/".$ligne[$i]['photo']."' class='card-img-top' alt='...'>
+								<div class='card-body'>
+									<h4 class='card-title'>".$ligne[$i]['type']."</h4>";
+							if(!is_null($ligne[$i]['caract'])){
+								$caract = json_decode($ligne[$i]['caract']);
+							if(!empty($caract->{'moteur'})){
+								echo "<h6 class='card-title'>".$caract->{'moteur'}. "</h6>";
+							}
+							if(!empty($caract->{'vitesse'})){
+								echo "<h6 class='card-title'>".$caract->{'vitesse'}. "</h6>";
+							}
+							if(!empty($caract->{'places'})){
+								echo "<h6 class='card-title'>".$caract->{'places'}." places</h6>";
+							}
+							}
+							echo "<hr><form action='index.php?controle=voiture&action=reservation_voiture&param1=$i' method='post'>
+							<h5>Date Debut</h5>
+							<input name='datedebut' type='date'><br/>
+							<h5>Date Fin</h5>
+							<input  name='datefin' type='date'><br/>
+							<input class='btn btn-primary' type= 'submit'  value='Louer la Voiture'>
+							</form>
+							</div>
+						</div>
+					</div>";
+					$i++;
+					}
+				}
+				else{ //Aucune Voiture n'est disponible pour la location
+					echo "Aucune voiture est disponible actuellement";
+				}
+				?> 
+			</div>
+		</div>				
 	</body>
 	
 </html>

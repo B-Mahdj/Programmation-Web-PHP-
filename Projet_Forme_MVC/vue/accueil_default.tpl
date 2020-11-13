@@ -13,7 +13,7 @@
 			<a class="navbar-brand">Application loueur de voitures</a>
 			<a class="btn btn-outline-success my-2 my-sm-0" href="index.php?controle=entreprise&action=connexion" role="button">Connexion</a> <!--mettre le lien pour la connexion-->
 		</nav>
-		<div class="jumbotron jumbotron-fluid">
+		<div class="jumbotron jumbotron-fluid" style="background-color: #42B3F3">
 			<div class="container">
 				<h1 class="display-2">Venez louer une voiture de votre choix dès maintenant !</h1>
 			</div>
